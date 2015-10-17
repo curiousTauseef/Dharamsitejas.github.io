@@ -1,0 +1,362 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    
+    <title>OOMD Lab Project</title>
+
+   
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+     
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    
+    
+    <link rel="shortcut icon" href="images/favicon.png" />
+
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="material.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript">
+      function showLogin()
+      {
+        div=document.getElementById("login");
+        div.style.display="block";
+      }
+
+  
+
+
+function users()
+{
+  othis=this;
+  this.customers=function()
+  {
+    xhr =new XMLHttpRequest();
+    xhr.onreadystatechange=othis.getCust;
+    var phone=document.getElementById("phone");
+
+    xhr.open("GET","http://localhost/OOMD/cust_details.php?phone="+phone.value,true);
+    xhr.send();
+  };
+
+  this.getCust=function()
+  {
+    if(xhr.readyState == 4 && xhr.status == 200)
+    {
+      customer=document.getElementById('contents');
+      cust=xhr.responseText;
+      sign=document.getElementById("sign");
+      sign1=document.getElementById("sign1");
+      if(cust!=0)
+      {
+        customer.innerHTML='This is a Registered Number';
+        
+      }
+      else
+      {
+        customer.innerHTML='User not registered!';
+        sign=document.getElementById("sign");
+        
+        sign.style.display="block";
+        sign.onclick=othis.addCust;
+        sign1.style.display="none";
+        othis.getUserDetails();   
+
+        trans=document.getElementById("trans");
+        trans.style.display="block";    
+      }
+    }
+  };
+
+  this.getUserDetails=function()
+  {
+    login_cred=document.getElementById('contents');
+    cust_name=document.createElement('input');
+    cust_name.className="mdl-textfield__input";
+
+    
+    login_cred.appendChild(cust_name);
+    
+  
+
+  };
+
+  this.addCust=function()
+  {
+    login_cred.innerHTML='';    
+    xhr1 =new XMLHttpRequest();
+    xhr1.onreadystatechange=othis.userAdded;
+    //var name=document.getElementById('name');
+    var phone=document.getElementById('phone');
+
+    xhr1.open("GET","http://localhost/OOMD/add_user.php?phone="+phone.value+'&name='+cust_name.value,true);
+    xhr1.send();  
+  };
+
+
+
+
+
+
+
+
+  this.userAdded=function()
+  {
+    if(xhr1.readyState == 4 && xhr1.status == 200)
+    {
+      alert('Successfully Created! Enjoy!');
+      alert("Welcome"+" "+cust_name.value);
+      customer.innerHTML='Welcome: '+cust_name.value;
+      document.getElementById("log").style.display="block";
+
+
+    }
+
+  };
+
+
+
+
+  this.alertName=function()
+  {
+    sign1=document.getElementById("sign1");
+    sign1.onclick=alert("Welcome "+""+cust);
+    trans=document.getElementById("trans");
+    trans.style.display="block";
+    customer=document.getElementById('contents');
+    customer.innerHTML="Welcome"+" "+cust+"!";
+    document.getElementById("log").style.display="block";
+
+
+  };
+}
+
+
+obj=new users();
+
+function bills()
+{
+  this.bill=function()
+  {
+      c1=document.getElementById("checkbox-1");
+      c2=document.getElementById("checkbox-2");
+      c3=document.getElementById("checkbox-3");
+      o1=document.getElementById("order1");
+      o2=document.getElementById("order2");
+      o3=document.getElementById("order3");
+      val=document.getElementById("value");
+      var amt=0;
+      if(c1.checked)
+      {
+        o1.innerHTML="Qty 1 Margarita";
+        amt=amt+200;
+      }
+      if(c2.checked)
+      {
+        o2.innerHTML="Qty 1 Mexican Green Wave";
+        amt=amt+300;
+      }
+      if(c3.checked)
+      {
+        o3.innerHTML="Qty 1 Extravaganza";
+        amt=amt+400;
+      }
+      alert("Your total payable amount is "+amt);
+      val.innerHTML="Your total payable amount is "+amt+".";
+      document.getElementById("bil").style.display="block";
+
+  };
+}
+
+var obj1 =new bills();
+
+
+  function logout()
+  {
+    var c=confirm("Do want to Logout?");
+    if(c)
+    {
+      location.reload();
+      document.getElementById("log").style.display="none";
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+    </script>
+  </head>
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+          <h3>OOMD Pizza Service </h3>
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+          <a href="#overview" class="mdl-layout__tab is-active">Login</a>
+          <button class="mdl-layout__tab is-active" style="display:none;" id="log" onclick="logout()">Logout</button>
+          
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add" onclick="showLogin()">
+            <i class="material-icons" role="presentation">add</i>
+            <span class="visuallyhidden">Add</span>
+          </button>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="mdl-layout__tab-panel is-active" id="overview">
+          <div id="login" style="display:none;">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+              <i class="material-icons">play_circle_filled</i>
+            </header>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="phone" onblur="obj.customers()" />
+                  <label class="mdl-textfield__label" for="phone">Number...</label>
+                </div>
+                
+                <div class="mdl-textfield mdl-js-textfield" id='contents'></div>
+              </div>
+              <div class="mdl-card__actions">
+                <button class="mdl-button" id="sign" style="display:none;">Sign Up</a>
+                  <button class="mdl-button" id="sign1" onclick="obj.alertName()">Login</a>
+              </div>
+              
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
+              <li class="mdl-menu__item">Logout</li>
+              
+            </ul>
+          </section>
+        </div>
+        <br>
+        <div id="trans" style="display:none;">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Your Order</h4>
+
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                  <div class="section__circle-container__circle mdl-color--blue"></div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                      <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" value=200/>
+                      <h4>Margarita       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;      Rs. 200 </h4>
+                      
+                     Toppings: Mozarrella Cheese, Marinara Sauce
+                      
+                  <label>
+                  
+                  
+                </div>
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                  <div class="section__circle-container__circle mdl-color--green"></div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+                      <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" value=300 />
+                      <h4>Mexican Green Wave &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;      Rs. 300 </h4>
+                      
+                     Toppings: Mozarrella Cheese, Marinara Sauce, Jalepenos, Red Chilli, Capsicum, Corn
+                      
+                  <label>
+                </div>
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                  <div class="section__circle-container__circle mdl-color--yellow"></div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-3">
+                      <input type="checkbox" id="checkbox-3" class="mdl-checkbox__input" value=400/>
+                      <h4>  Extravaganza    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;      Rs. 400 </h4>
+                      
+                     Toppings: Mozarrella Cheese, Marinara Sauce, Olives, Onions, Jalepenos, Capsicum, Gouda, Tomatoes
+                      
+                  <label>
+                </div>
+              </div>
+              <div class="mdl-card__actions">
+                <button class="mdl-button" onclick="obj1.bill()">Move To Bill</button>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn2">
+              <i class="material-icons">more_vert</i>
+            </button>
+            
+          </section>
+        </div>
+        <br>
+        <br>
+        <div id="bil" style="display:none;">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text" >
+                <h4>Transaction</h4>
+
+                <div id="order1">
+                </div>
+                <div id="order2">
+                </div>
+                <div id="order3">
+                </div>
+                <div id="value">
+                </div>
+
+              </div>
+              <div class="mdl-card__actions">
+                <button class="mdl-button" onclick="alert('Successfully Paid! Your order under preparation.');">Confirm</a>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn3">
+              <i class="material-icons">more_vert</i>
+            </button>
+            
+          </section>
+
+        </div>
+      <br>
+        <br>
+          <section class="section--footer mdl-color--white mdl-grid">
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+              <div class="section__circle-container__circle mdl-color--accent section__circle--big"></div>
+            </div>
+            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <h5>Guide </h5>
+              Samatha Mam
+              <br>
+              <a href="mailto:r.samatha@gmail.com">r.samatha@gmail.com </a>
+              <br>
+
+            </div>
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+              <div class="section__circle-container__circle mdl-color--primary section__circle--big"></div>
+            </div>
+            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <h5>Students </h5>
+              1PI12CS 044,045,046,047,048
+              <br>
+              PESIT CSE 7th Sem A Section
+            </div>
+          </section>
+        </div>
+
+        
+        
+    <script src="../../material.min.js"></script>
+  </body>
+</html>
