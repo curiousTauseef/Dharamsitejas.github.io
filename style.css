@@ -1,0 +1,287 @@
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	margin: 0;
+	list-style-type: none;
+	display: block;
+	float: left;
+	position: relative;
+
+	width: 50%;
+	height: 0;
+	padding-bottom: 50%;
+	
+	background-size: cover;
+	background-position: center;
+}
+
+.cover {
+	margin: 0;
+	transition: .4s;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+h2 {
+	padding: 2rem;
+	line-height: 1.2;
+	font-size: 3vw;
+}
+
+/* HOVER effect*/
+
+body.test .cover {
+	opacity: 0;
+}
+
+body.test h2 {
+	opacity: 1;
+}
+
+.cover {
+	opacity: 1;
+	cursor: pointer;
+}
+.cover:hover,
+.cover:active,
+.cover:focus {
+	opacity: 0;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;  
+}
+
+h2 {
+	opacity: 0;
+	transition: .8s;
+	pointer-events: none;
+}
+
+li:hover h2,
+li:focus h2,
+li:active h2 {
+	opacity: 1;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;  
+}
+
+/* TYPOGRAPHY */
+
+@font-face {
+  font-family: 'alpha';
+  src: url('alpha_echo-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+	font-family: 'alpha';
+	width:auto;  
+	overflow-x:hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+/* SIZES */
+.xs {
+	font-size: 130%;
+}
+
+.l {
+	font-size: 180%;
+}
+
+.xl {
+	font-size: 200%;
+}
+
+.xxl {
+	font-size: 250%;
+}
+
+.xxxl {
+	font-size: 300%;
+}
+
+.xxxxl {
+	font-size: 350%;
+}
+
+/* COLOURS */
+
+.cover {	
+	color: white;
+}
+
+h2 {
+	color: white;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}	
+
+.sunset-orange
+{
+	background-color: #F64747;
+}
+
+.plum
+{
+	background-color: #913D88;
+}
+
+.flower
+{
+	background-color: #F1A9A0;
+}
+
+.radical
+{
+	background-color: #F62459;
+}
+
+.spray
+{
+	background-color: #81CFE0;
+}
+
+.jacksons-purple
+{
+	background-color: #1F3A93;
+}
+
+.aqua-island
+{
+	background-color: #A2DED0;
+}
+
+.mountain
+{
+	background-color: #1BBC9B;
+}
+
+.california
+{
+	background-color: #F89406;
+}
+
+.cape-honey
+{
+	background-color: #FDE3A7;
+}
+
+.ecstasy
+{
+	background-color: #F9690E;
+}
+
+.summer-sky
+{
+	background-color: #1E8BC3;
+}
+
+.madang
+{
+	background-color: #C8F7C5;
+}
+
+.sandstorm
+{
+	background-color: #F9BF3B;
+}
+
+.orange
+{
+	color: #FF602B;
+	text-shadow: none;
+}
+
+.dark-blue
+{
+	color: #23266B;
+	text-shadow: none;
+}
+
+.tongue
+{
+	color: #FF4F7A;
+	text-shadow: none;
+}
+
+.mustard
+{
+	color:#F5E829;
+}
+
+.aqua-blue
+{
+	color: #2EBAAB;
+	text-shadow: none;
+}
+
+.aqua-light
+{
+	color: #00D6C2;
+	text-shadow: none;
+}
+.pink
+{
+	color: #ff69b4;
+	text-shadow: none;
+}
+
+
+/* RESPONSIFYINGS */
+
+body {
+	max-width: 60rem;
+	margin: 0 auto;
+}
+
+@media (max-width: 40rem) {
+
+	ul li {
+		width: 100%;
+		padding-bottom: 100%;
+	}
+}
+
+@media (min-width: 641px) 
+  and (max-width: 750px) {
+
+  	.l {
+		font-size: 140%;
+	}
+
+	.xl {
+		font-size: 160%;
+	}
+
+  }	
+
+ @media (max-width: 390px)
+ {
+ 	.l{
+ 		font-size: 140%;
+ 	}
+
+ 	.xl{
+ 		font-size: 160%;
+ 	}
+
+ 	.xxl{
+ 		font-size: 180%;
+ 	}
+
+ 	.xxxl{
+ 		font-size: 200%;
+ 	}
+ 	.xxxxl{
+ 		font-size: 220%;
+ 	}
+
+
+ }
